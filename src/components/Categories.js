@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 
 const categories = [
    'all', 'business', 'entertainment', 'health', 'science', 'sports', 'technology'
@@ -25,18 +25,36 @@ const Category = styled.div`
     padding-bottom: 0.25rem;
     
     &:hover {
-        color: lightblue;
+        color: blue;
     }
+    
+    ${props => 
+        props.active && css`
+            font-weight: 600;
+            border-bottom: 2px solid blue;
+            color: blue;
+            &:hover {
+            background: blue;
+            color: white;
+            border-bottom: 2px solid white;
+            }
+    `}
     
     & + & {
         margin-left: 1rem;
     }
 `;
-const Categories = () => {
+const Categories = ({ onSelect, category }) => {
     return (
         <CategoriesBlock>
-            {categories.map(category => (
-                <Category key={category}>{category.slice(0, 1).toUpperCase() + category.slice(1)}</Category>
+            {categories.map(c => (
+                <Category
+                    key={c}
+                    active={c === category}
+                    onClick={() => onSelect(c)}
+                >
+                    {c.slice(0, 1).toUpperCase() + c.slice(1)}
+                </Category>
             ))}
         </CategoriesBlock>
     );
