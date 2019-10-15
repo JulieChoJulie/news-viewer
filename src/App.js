@@ -5,7 +5,7 @@ import Categories from './components/Categories';
 
 const App = () => {
     const [category, setCategory] = useState('all');
-    const onSelect = useCallback(category => setCategory(category), []);
+    const onSelect = useCallback(c => setCategory(c), []);
 
     return (
         <div>

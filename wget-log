@@ -1,0 +1,6 @@
+--2019-10-03 18:58:32--  https://newsapi.org/v2/top-headlines?sources=google-news-ca
+Resolving newsapi.org (newsapi.org)... 167.114.118.40
+Connecting to newsapi.org (newsapi.org)|167.114.118.40|:443... connected.
+HTTP request sent, awaiting response... 401 Unauthorized
+
+Username/Password Authentication Failed.

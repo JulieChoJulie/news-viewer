@@ -13,7 +13,7 @@ const NewsListBlock = styled.div`
     margin-top: 2rem;
     @media screen and (max-width: 768px) {
         width: 100%;
-        paddig-left: 1rem;
+        padding-left: 1rem;
         padding-right: 1rem;
     }    
 `;
@@ -25,28 +25,17 @@ const sampleArticle = {
     urlToImage: 'https://via.placeholder.com/160',
 }
 
-const NewsList = () => {
+const NewsList = ({ category }) => {
     const [articles, setArticles] = useState(null);
     const [loading, setLoading] = useState(false);
     const YOUR_API_KEY = process.env.REACT_APP_NEWS_API_KEY;
-
-
-    // const [data, setData] = useState(null);
-    // const YOUR_API_KEY = process.env.REACT_APP_NEWS_API_KEY;
-    // const onClick = async () => {
-    //     try {
-    //         const response = await axios.get(`https://newsapi.org/v2/top-headlines?sources=google-news-ca&apiKey=${YOUR_API_KEY}`);
-    //         setData(response.data);
-    //     } catch (e) {
-    //         console.log(e);
-    //     }
-    // }
 
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const response = await axios.get(`https://newsapi.org/v2/top-headlines?sources=google-news-ca&apiKey=${YOUR_API_KEY}`);
+                const query = category === 'all' ? '' : `&category=${category}`;
+                const response = await axios.get(`https://newsapi.org/v2/top-headlines?country=ca${query}&apiKey=${YOUR_API_KEY}`);
                 setArticles(response.data.articles);
             } catch (e) {
                 console.log(e);
@@ -54,7 +43,7 @@ const NewsList = () => {
             setLoading(false);
         };
         fetchData();
-    }, []);
+    }, [category, YOUR_API_KEY]);
 
     if (loading) {
         return <NewsListBlock>Loading...</NewsListBlock>
